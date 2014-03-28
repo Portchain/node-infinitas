@@ -2,6 +2,12 @@
 **Note**: Sonic is in active development. This Readme currently describes what version 1.0.0 of Sonic
 will provide.
 
+#### What is working so far ?
+
+In memory scheduling with 'cron' and 'interval' functionality.
+
+
+
 # Overview
 
 Sonic is a node.js based scheduling engine. Think of it as an application level 'cron' scheduler.
