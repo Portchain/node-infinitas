@@ -50,19 +50,19 @@ to run. A task that is running or that has run is a ```Job```.
 
 A task, has the following properties:
 
-| Property      | -sub     | Type    | Description                                                                                                                                                                             |
-|---------------|----------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name          |          | string  | each task is uniquely identifiable through a name within the system                                                                                                                     |
-| minInterval   |          | integer | defines a minimum interval for this task in milliseconds. null by default. If set, the scheduler will make sure that this task does not run more than every <minInterval> milliseconds. |
-| lastRun *     |          | Object  | an object representing the last triggered job                                                                                                                                           |
-|               | id       | string  | the unique identifier of the last triggered job                                                                                                                                         |
-|               | date     | Date    | represents the date of the last triggered job                                                                                                                                           |
-|               | status   | string  | one of "succeeded", "failed", "running"                                                                                                                                                 |
-| lastFailure * |          | Object  | an object representing the last failed job. Attributes same as above                                                                                                                    |
-| lastSuccess * |          | Object  | an object representing the last successful job. Attributes same as above                                                                                                                |
-| schedules     |          | Array   | An array of schedules, with no specific order                                                                                                                                           |
-|               | type     | string  | The type of schedule. Can be one of "interval", "cron"                                                                                                                                  |
-|               | interval | int     | The number of milliseconds between each job                                                                                                                                             |
+| Property      | -sub   | Type    | Description                                                                                                                                                                             |
+|---------------|--------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name          |        | string  | each task is uniquely identifiable through a name within the system                                                                                                                     |
+| minInterval   |        | integer | defines a minimum interval for this task in milliseconds. null by default. If set, the scheduler will make sure that this task does not run more than every <minInterval> milliseconds. |
+| lastRun *     |        | Object  | an object representing the last triggered job                                                                                                                                           |
+|               | id     | string  | the unique identifier of the last triggered job                                                                                                                                         |
+|               | date   | Date    | represents the date of the last triggered job                                                                                                                                           |
+|               | status | string  | one of "succeeded", "failed", "running"                                                                                                                                                 |
+| lastFailure * |        | Object  | an object representing the last failed job. Attributes same as above                                                                                                                    |
+| lastSuccess * |        | Object  | an object representing the last successful job. Attributes same as above                                                                                                                |
+| schedules     |        | Array   | An array of schedules, with no specific order                                                                                                                                           |
+|               | type   | string  | The type of schedule. Can be one of "interval", "cron"                                                                                                                                  |
+|               | data   | int     | The number of milliseconds between each job                                                                                                                                             |
 
 Properties with a ```*``` are read only.
 
@@ -72,7 +72,7 @@ Properties with a ```*``` are read only.
 
 # Node.js API
 
-## sonic.schedule()
+
 
     var sonic = new Sonic({})
 
@@ -80,10 +80,10 @@ Properties with a ```*``` are read only.
       name: 'myTaskName',
       schedules: [{
         type: 'cron',
-        cron: '* * * * *'
+        data: '* * * * *'
       }, {
         type: 'interval',
-        interval: 60 * 60 * 1000 // every hour
+        data: 60 * 60 * 1000 // every hour
       }]
     }
 
@@ -102,7 +102,7 @@ Properties with a ```*``` are read only.
     sonic.unschedule('myTaskName', '* * * * *', function(err, scheduleId) {})
 
     // Here is how you declare your business logic
-    sonic.on('myTaskName', function(taskName, scheduleId, jobId) {
+    sonic.on('myTaskName', function(task, schedule, jobId) {
       // task business logic here...
 
       // signal the progress if it is a long running job that you want to monitor
@@ -126,3 +126,5 @@ Properties with a ```*``` are read only.
 
     })
 
+
+# HTTP API
