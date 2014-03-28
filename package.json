@@ -1,0 +1,39 @@
+{
+  "name": "sonic",
+  "version": "0.1.0",
+  "description": "distributed scheduling system with flexible persistence (mongodb by default)",
+  "main": "Sonic.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nherment/sonic.git"
+  },
+  "keywords": [
+    "schedule",
+    "scheduler",
+    "scheduling",
+    "mongodb",
+    "mongo",
+    "cron",
+    "mysql",
+    "distributed"
+  ],
+  "author": "Nicolas Herment <nherment@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nherment/sonic/issues"
+  },
+  "homepage": "https://github.com/nherment/sonic",
+  "dependencies": {
+    "uuid": "1.4.1",
+    "lockfile": "0.4.2"
+  },
+  "devDependencies": {
+    "mocha": "1.18.2"
+  }
+}
