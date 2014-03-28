@@ -1,7 +1,7 @@
 {
   "name": "sonic",
   "version": "0.1.0",
-  "description": "distributed scheduling system with flexible persistence (mongodb by default)",
+  "description": "distributed scheduling system with flexible persistence",
   "main": "Sonic.js",
   "directories": {
     "test": "test"
@@ -34,7 +34,7 @@
     "lockfile": "0.4.2",
     "cron": "1.0.4",
     "cron-parser": "0.3.1",
-    "timeout-scheduler": "0.1.0"
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
     "mocha": "1.18.2"

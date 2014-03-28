@@ -102,7 +102,7 @@ Properties with a ```*``` are read only.
     sonic.unschedule('myTaskName', '* * * * *', function(err, scheduleId) {})
 
     // Here is how you declare your business logic
-    sonic.on('myTaskName', function(task, schedule, jobId) {
+    sonic.setProcessor('myTaskName', function(task, schedule, jobId) {
       // task business logic here...
 
       // signal the progress if it is a long running job that you want to monitor
