@@ -1,6 +1,6 @@
 
-**Note**: Sonic is in active development. This Readme currently describes what version 1.0.0 of Sonic
-will provide.
+**Note**: Sonic is in active development. This Readme currently describes what version 1.0.0 of
+Sonic will provide.
 
 #### What is working so far ?
 
