@@ -1,7 +1,7 @@
 
 var assert = require('assert')
 
-var Sonic = require('../Sonic.js')
+var Infinitas = require('../Infinitas.js')
 
 
 describe('runtime', function() {
@@ -10,7 +10,7 @@ describe('runtime', function() {
 
     this.timeout(2000)
 
-    var sonic = new Sonic()
+    var sonic = new Infinitas()
 
 
     sonic.schedule('task1', '* * * * * *')
@@ -28,7 +28,7 @@ describe('runtime', function() {
 
     this.timeout(1000)
 
-    var sonic = new Sonic()
+    var sonic = new Infinitas()
 
     sonic.schedule('task2', 500)
 

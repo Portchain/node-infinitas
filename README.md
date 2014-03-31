@@ -1,6 +1,6 @@
 
 **Note**: Sonic is in active development. This Readme currently describes what version 1.0.0 of
-Sonic will provide.
+Infinitas will provide.
 
 #### What is working so far ?
 
@@ -10,25 +10,25 @@ In memory scheduling with 'cron' and 'interval' functionality.
 
 # Overview
 
-Sonic is a node.js based scheduling engine. Think of it as an application level 'cron' scheduler.
+Infinitas is a node.js based scheduling engine. Think of it as an application level 'cron' scheduler.
 It exposes a node.js API as well as a HTTP API and therefore can be integrated with virtually any
 application that can call and expose HTTP JSON services.
 
 It can scale to thousands of scheduled jobs with no sweat.
 
-# What can Sonic do for you ?
+# What can Infinitas do for you ?
 
 If your application has tasks that need to occur at specific moments in time or if you need
-regular maintenance jobs to be triggered, Sonic is for you.
+regular maintenance jobs to be triggered, Infinitas is for you.
 
-A few examples of what Sonic can do:
+A few examples of what Infinitas can do:
 
 - Perform database archival at regular interval (eg. at midnight every 24hours)
 - Crawl your database once a week for records that can be archived and publish these in an other,
 less dynamic storage
 - Provide calendar reminders for your application (eg. a task is due)
 
-Sonic features include:
+Infinitas features include:
 
 - persistence: it makes your jobs resilient (out of the box with postgres, redis and filesystem)
 - monitoring/audit: Sonic comes with a user interface for your jobs statuses and can notify you of
@@ -41,7 +41,7 @@ failures
 There are 2 ways that you can deploy Sonic. It can be embedded within your node.js instances or it
 can be deployed as a standalone cluster of node.js instances, typically behind a load balancer.
 
-Sonic works as a cluster of nodes, all of them behaving as a master and competing to execute
+Infinitas works as a cluster of nodes, all of them behaving as a master and competing to execute
 scheduled jobs.
 
 
@@ -80,7 +80,7 @@ Properties with a ```*``` are read only.
 
 
 
-    var sonic = new Sonic({})
+    var infinitas = new Infinitas({})
 
     var task = {
       name: 'myTaskName',
@@ -93,22 +93,22 @@ Properties with a ```*``` are read only.
       }]
     }
 
-    sonic.schedule(task, function(err, scheduleId) {
+    infinitas.schedule(task, function(err, scheduleId) {
     })
 
     // the following is an equivalent alternative
-    sonic.schedule('myTaskName', ['* * * * *', 3600000], function(err, scheduleId) {})
+    infinitas.schedule('myTaskName', ['* * * * *', 3600000], function(err, scheduleId) {})
 
     // or you can split it in 2 calls
-    sonic.schedule('myTaskName', '* * * * *', function(err, scheduleId) {})
-    sonic.schedule('myTaskName', 3600000, function(err, scheduleId) {})
+    infinitas.schedule('myTaskName', '* * * * *', function(err, scheduleId) {})
+    infinitas.schedule('myTaskName', 3600000, function(err, scheduleId) {})
 
     // and there are several ways of removing a schedule
-    sonic.unschedule('myTaskName', scheduleId, function(err, scheduleId) {})
-    sonic.unschedule('myTaskName', '* * * * *', function(err, scheduleId) {})
+    infinitas.unschedule('myTaskName', scheduleId, function(err, scheduleId) {})
+    infinitas.unschedule('myTaskName', '* * * * *', function(err, scheduleId) {})
 
     // Here is how you declare your business logic
-    sonic.setProcessor('myTaskName', function(task, schedule, jobId) {
+    infinitas.setProcessor('myTaskName', function(task, schedule, jobId) {
       // task business logic here...
 
       // signal the progress if it is a long running job that you want to monitor
