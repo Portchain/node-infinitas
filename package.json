@@ -1,5 +1,5 @@
 {
-  "name": "Infinitas",
+  "name": "infinitas",
   "version": "0.1.0",
   "description": "distributed scheduling system with flexible persistence",
   "main": "Infinitas.js",
@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test --reporter spec"
+    "test": "./node_modules/.bin/mocha test --reporter spec"
   },
   "repository": {
     "type": "git",

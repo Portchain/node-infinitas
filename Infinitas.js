@@ -15,18 +15,12 @@ function Infinitas(options) {
   this._queue = kue.createQueue()
 
   var self = this
-  this._checkNextBinded = function() {
-    self._checkNext()
-  }
-
-  this._checkNext()
 }
 
 Infinitas.STORE = {
   MemoryStore      : MemoryStore,
   FileSystemStore  : FileSystemStore
 }
-
 
 /** Schedule a new job
  *
