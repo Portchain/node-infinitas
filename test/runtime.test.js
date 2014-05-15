@@ -10,14 +10,14 @@ describe('runtime', function() {
 
     this.timeout(2000)
 
-    var sonic = new Infinitas()
+    var infinitas = new Infinitas()
 
 
-    sonic.schedule('task1', '* * * * * *')
+    infinitas.schedule('task1', '* * * * * *')
 
-    sonic.setProcessor('task1', function(task, schedule, jobId) {
+    infinitas.setProcessor('task1', function(task, schedule, jobId) {
 
-      sonic.setProcessor('task1', null)
+      infinitas.setProcessor('task1', null)
 
       assert.equal(task.name, 'task1')
       done()
@@ -28,12 +28,12 @@ describe('runtime', function() {
 
     this.timeout(1000)
 
-    var sonic = new Infinitas()
+    var infinitas = new Infinitas()
 
-    sonic.schedule('task2', 500)
+    infinitas.schedule('task2', 500)
 
-    sonic.setProcessor('task2', function(task, schedule, jobId) {
-      sonic.setProcessor('task2', null)
+    infinitas.setProcessor('task2', function(task, schedule, jobId) {
+      infinitas.setProcessor('task2', null)
       assert.equal(task.name, 'task2')
       done()
     })

@@ -27,7 +27,13 @@ Infinitas.STORE = {
  * @callback(err, scheduleId)
  */
 Infinitas.prototype.schedule = function(taskOrTaskName, scheduleOrCallback, callback) {
-
+  var self = this
+  setTimeout(function() {
+    var processor = self._processors[taskOrTaskName]
+    if(processor) {
+      processor(taskOrTaskName, scheduleOrCallback)
+    }
+  }, scheduleOrCallback)
 }
 
 /** Retrieve the schedule information of a given job

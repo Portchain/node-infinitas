@@ -1,5 +1,9 @@
 
-**Note**: Sonic is in active development. This Readme currently describes what version 1.0.0 of
+### Infinitas
+
+A scalable scheduler with persistence. Useable through both a node.js and a HTTP API.
+
+**Note**: Infinitas is in active development. This Readme currently describes what version 1.0.0 of
 Infinitas will provide.
 
 #### What is working so far ?
@@ -23,10 +27,10 @@ regular maintenance jobs to be triggered, Infinitas is for you.
 
 A few examples of what Infinitas can do:
 
-- Perform database archival at regular interval (eg. at midnight every 24hours)
+- Perform database archival at regular interval (eg. at midnight or every 12 hours)
 - Crawl your database once a week for records that can be archived and publish these in an other,
 less dynamic storage
-- Provide calendar reminders for your application (eg. a task is due)
+- Provide calendar reminders for your application (eg. send an email 1 day before a task is due)
 
 Infinitas features include:
 
