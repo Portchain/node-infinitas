@@ -1,5 +1,4 @@
 
-var kue              = require('kue')
 var _                = require('underscore')
 var Timeout          = require('timeout-scheduler')
 var JobContext       = require('./lib/JobContext.js')
@@ -12,7 +11,6 @@ function Infinitas(options) {
   this._interval = options.interval || 100
   this._timeout = new Timeout()
   this._processors = {}
-  this._queue = kue.createQueue()
 
   var self = this
 }
@@ -26,7 +24,7 @@ Infinitas.STORE = {
  *
  * @callback(err, scheduleId)
  */
-Infinitas.prototype.schedule = function(taskOrTaskName, scheduleOrCallback, callback) {
+Infinitas.prototype.schedule = function(task, callback) {
   var self = this
   setTimeout(function() {
     var processor = self._processors[taskOrTaskName]
