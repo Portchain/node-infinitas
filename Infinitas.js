@@ -1,58 +1,53 @@
 
-var _                = require('underscore')
-var Timeout          = require('timeout-scheduler')
-var JobContext       = require('./lib/JobContext.js')
-var MemoryStore      = require('./lib/persistence/MemoryStore.js')
-var FileSystemStore  = require('./lib/persistence/FileSystemStore.js')
+const Scheduler = require('./lib/Scheduler.js')
+const migration = require('./lib/migration.js')
+const logger = require('logacious')()
 
 function Infinitas(options) {
 
   options = options || {}
-  this._interval = options.interval || 100
-  this._timeout = new Timeout()
   this._processors = {}
 
-  var self = this
+  if(!options.server) {
+    migration((err) => {
+      if(err) throw err
+      this._scheduler = new Scheduler(/*pollDB*/ true)
+      this._scheduler.on('job', (taskName, job) => {
+        logger.info(`JOB EVENT ${taskName}.${job.id}`, this._processors)
+        if(this._processors[taskName]) {
+          let processor = this._processors[taskName]
+          logger.info(`Running job ${taskName}.${job.id}`)
+          processor.call(null, job)
+        } else {
+          logger.warn(`Could not find any processor for job ${taskName}.${job.id}`)
+          job.log('no processor found')
+          job.fail((err) => {
+            if(err) {
+              logger.error(err)
+            }
+          })
+        }
+      })
+
+      if(options.onReady) {
+        options.onReady()
+      }
+    })
+  }
 }
 
-Infinitas.STORE = {
-  MemoryStore      : MemoryStore,
-  FileSystemStore  : FileSystemStore
-}
-
-/** Schedule a new job
- *
- * @callback(err, scheduleId)
- */
 Infinitas.prototype.schedule = function(task, callback) {
-  var self = this
-  setTimeout(function() {
-    var processor = self._processors[taskOrTaskName]
-    if(processor) {
-      processor(taskOrTaskName, scheduleOrCallback)
-    }
-  }, scheduleOrCallback)
+  this._scheduler.scheduleTask(task, callback)
 }
 
-/** Retrieve the schedule information of a given job
- *
- */
-Infinitas.prototype.getTask = function(taskName, callback) {
-  throw new Error('not implemented')
-}
-
-/** Remove the schedule information of a given job
- *
- */
-Infinitas.prototype.unchedule = function(taskName, schedule, callback) {
-  throw new Error('not implemented')
+Infinitas.prototype.unschedule = function(taskName, callback) {
+  this._scheduler.unscheduleTask(taskName, callback)
 }
 
 
-Infinitas.prototype.setProcessor = function(taskName, processor) {
-  // yes, this may replace an existing processor.
-  // We do want only one processor per task.
-  this._processors[taskName] = processor
+Infinitas.prototype.setProcessor = function(taskName, func) {
+  this._processors[taskName] = func
 }
+
 
 module.exports = Infinitas

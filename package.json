@@ -30,13 +30,16 @@
   },
   "homepage": "https://github.com/nherment/node-infinitas",
   "dependencies": {
-    "uuid": "1.4.1",
-    "lockfile": "0.4.2",
     "cron": "1.0.4",
-    "cron-parser": "0.3.1",
-    "underscore": "1.6.0",
+    "cron-parser": "2.4.0",
     "kue": "0.7.5",
-    "timeout-scheduler": "0.1.0"
+    "lockfile": "0.4.2",
+    "logacious": "0.1.0",
+    "pg-js": "0.5.0",
+    "postgrator": "2.9.0",
+    "timeout-scheduler": "0.1.0",
+    "underscore": "1.6.0",
+    "uuid": "1.4.1"
   },
   "devDependencies": {
     "mocha": "1.18.2"

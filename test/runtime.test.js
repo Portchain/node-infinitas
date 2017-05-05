@@ -1,41 +1,53 @@
 
-var assert = require('assert')
-
-var Infinitas = require('../Infinitas.js')
+const assert = require('assert')
+const crypto = require('crypto')
+const Infinitas = require('../Infinitas.js')
+const logger = require('logacious')()
 
 
 describe('runtime', function() {
 
-  it('cron', function(done) {
+  let infinitas
+  let testId = 'test-' + crypto.randomBytes(3).toString('hex')
 
-    this.timeout(2000)
+  before((done) => {
+    infinitas = new Infinitas({
+      onReady: done
+    })
+  })
 
-    var infinitas = new Infinitas()
+  it('schedule task', function(done) {
+    this.timeout(6000)
 
-
-    infinitas.schedule('task1', '* * * * * *')
-
-    infinitas.setProcessor('task1', function(task, schedule, jobId) {
-
-      infinitas.setProcessor('task1', null)
-
-      assert.equal(task.name, 'task1')
+    infinitas.schedule({
+      name: testId,
+      schedule: '*/1 * * * * *',
+      timeout: 10000
+    }, (err) => {
       done()
     })
   })
 
-  it('interval', function(done) {
+  it('register a processor', function(done) {
 
-    this.timeout(1000)
+    infinitas.setProcessor(testId, job => {
+      
+      job.log('hello world')
+      job.done((err) => {
+        done(err)
+      })
+    })
+  })
 
-    var infinitas = new Infinitas()
+  it('unregister a processor', function(done) {
 
-    infinitas.schedule('task2', 500)
+    infinitas.setProcessor(testId, null) // disable
+    setTimeout(done, 1500)
+  })
 
-    infinitas.setProcessor('task2', function(task, schedule, jobId) {
-      infinitas.setProcessor('task2', null)
-      assert.equal(task.name, 'task2')
-      done()
+  after(done => {
+    infinitas.unschedule(testId, (err) => {
+      done(err)
     })
   })
 
