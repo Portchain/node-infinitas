@@ -51,70 +51,70 @@ clients.
 # Quick start
 
 ```
-    const Infinitas = require('infinitas')
+const Infinitas = require('infinitas')
     
-    var infinitas = new Infinitas()
+var infinitas = new Infinitas()
 
-    var task = {
-      name: 'myTaskName',
-      schedule: '*/15 * * * *',
-      timeout: 60000 // timeout in milliseconds
-    }
+var task = {
+  name: 'myTaskName',
+  schedule: '*/15 * * * *',
+  timeout: 60000 // timeout in milliseconds
+}
 
-    infinitas.schedule(task, function(err) {
-      // jobs for that task will be created every minute and every hour
-    })
+infinitas.schedule(task, function(err) {
+  // jobs for that task will be created every minute and every hour
+})
 
-    // unschedule a task
-    infinitas.unschedule('myTaskName', function(err) {})
+// unschedule a task
+infinitas.unschedule('myTaskName', function(err) {})
 
-    // Here is how you declare your business logic
-    infinitas.addProcessor('myTaskName', function(job) {
-      // task business logic here...
+// Here is how you declare your business logic
+infinitas.addProcessor('myTaskName', function(job) {
+  // task business logic here...
 
-      job.on('timeout', (taskTimeoutValue) => {
-        // The job timed-out
-        // Note that because this event, job.done() and job.fail() are all
-        //   asynchronous there is no guarantee that the timeout event will fire
-        //   before you call job.done() or job.fail().
-        // Regardless of a job timeout status, job.log() will continue to log
-        //   your messages.
-      })
+  job.on('timeout', (taskTimeoutValue) => {
+    // The job timed-out
+    // Note that because this event, job.done() and job.fail() are all
+    //   asynchronous there is no guarantee that the timeout event will fire
+    //   before you call job.done() or job.fail().
+    // Regardless of a job timeout status, job.log() will continue to log
+    //   your messages.
+  })
 
-      // optionally, you can signal the progress of a job
-      job.progress(0.10) // with either a float between 0 and 1 respectively 0% and 100%
-      job.progress('step1') // or steps
-      job.progress(0.30, 'step2') // or both
+  // optionally, you can signal the progress of a job
+  job.progress(0.10) // with either a float between 0 and 1 respectively 0% and 100%
+  job.progress('step1') // or steps
+  job.progress(0.30, 'step2') // or both
 
-      // log information related to the job
-      // An optional callback will catch transmission errors to the server.
-      // If no callback is used, errors are ignored
-      job.log('A Fox once saw a Crow...')
+  // log information related to the job
+  // An optional callback will catch transmission errors to the server.
+  // If no callback is used, errors are ignored
+  job.log('A Fox once saw a Crow...')
 
-      // when the task is finished, call this.done()
-      job.done((err) => {
-        // err is non null when:
-        //   - infinitas server cannot be contacted (err.code = 'server_unreachable')
-        //   - the job has already timed out (err.code = 'job_timed_out')
-        //   - job.done() was already called (err.code = 'job_done')
-        //   - job.fail() was previously called (err.code = 'job_failed')
-      })
+  // when the task is finished, call this.done()
+  job.done((err) => {
+    // err is non null when:
+    //   - infinitas server cannot be contacted (err.code = 'server_unreachable')
+    //   - the job has already timed out (err.code = 'job_timed_out')
+    //   - job.done() was already called (err.code = 'job_done')
+    //   - job.fail() was previously called (err.code = 'job_failed')
+  })
       
-      // or if it failed, you can call this.fail()
-      job.fail((err) => {
-        // err is non null when:
-        //   - infinitas server cannot be contacted (err.code = 'server_unreachable')
-        //   - the job has already timed out (err.code = 'job_timed_out')
-        //   - job.fail() was already called (err.code = 'job_failed')
-        //   - job.done() was previously called (err.code = 'job_done')
-      })
+  // or if it failed, you can call this.fail()
+  job.fail((err) => {
+    // err is non null when:
+    //   - infinitas server cannot be contacted (err.code = 'server_unreachable')
+    //   - the job has already timed out (err.code = 'job_timed_out')
+    //   - job.fail() was already called (err.code = 'job_failed')
+    //   - job.done() was previously called (err.code = 'job_done')
+  })
 
 
-      // Note that you cannot log messages after calling either job.done() or
-      //   job.fail()
-      job.log('A Fox once saw a Crow...') // this will throw an error
+  // Note that you cannot log messages after calling either job.done() or
+  //   job.fail()
+  job.log('A Fox once saw a Crow...') // this will throw an error
 
-    })
+})
 ```
 
 # Objects
@@ -128,17 +128,17 @@ At a specific time or interval, a ```Task``` is sent as a ```Job``` to a
 A task has the following properties:
 
 | Property      | -sub   | Type    | Description                                                                                                                                                                             |
-|---------------|--------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| name          |        | string  | each task is uniquely identifiable through a name within the system                                                                                                                     |
-| lastJob *     |        | Object  | an object representing the last triggered job                                                                                                                                           |
-|               | id     | string  | the unique identifier of the last triggered job                                                                                                                                         |
-|               | date   | Date    | represents the date of the last triggered job                                                                                                                                           |
-|               | status | string  | one of "succeeded", "failed", "running"                                                                                                                                                 |
-| lastFailure * |        | Object  | an object representing the last failed job. Attributes same as above                                                                                                                    |
-| lastSuccess * |        | Object  | an object representing the last successful job. Attributes same as above                                                                                                                |
-| schedule      |        | string  | CRON-like schedule                                                                                                                                                                      |
+|---------------|--------|---------|--------------------------------------------------------------------------|
+| name          |        | string  | each task is uniquely identifiable through a name within the system      |
+| lastJob *     |        | Object  | an object representing the last triggered job                            |
+|               | id     | string  | the unique identifier of the last triggered job                          |
+|               | date   | Date    | represents the date of the last triggered job                            |
+|               | status | string  | one of "succeeded", "failed", "running"                                  |
+| lastFailure * |        | Object  | an object representing the last failed job. Attributes same as above     |
+| lastSuccess * |        | Object  | an object representing the last successful job. Attributes same as above |
+| schedule      |        | string  | CRON-like schedule                                                       |
 
-Properties with a ```*``` are read only.
+> Properties with a ```*``` are read only.
 
 
 ## Schedule
@@ -146,6 +146,9 @@ Properties with a ```*``` are read only.
 ## Processor
 
 # Multiple clients
+
+> NOT SUPPORTED YET !
+
 
 The above quick start runs a single client and a single Infinitas server in the
 local process. If you want multiple clients to concurrently run tasks, Infinitas
