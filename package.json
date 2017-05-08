@@ -24,22 +24,21 @@
     "distributed"
   ],
   "author": "Nicolas Herment <nherment@gmail.com>",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/nherment/node-infinitas/issues"
   },
   "homepage": "https://github.com/nherment/node-infinitas",
   "dependencies": {
-    "cron": "1.0.4",
+    "adaro": "1.0.4",
+    "body-parser": "1.17.1",
     "cron-parser": "2.4.0",
-    "kue": "0.7.5",
-    "lockfile": "0.4.2",
+    "csurf": "1.9.0",
+    "express": "4.15.2",
     "logacious": "0.1.0",
     "pg-js": "0.5.0",
-    "postgrator": "2.9.0",
-    "timeout-scheduler": "0.1.0",
-    "underscore": "1.6.0",
-    "uuid": "1.4.1"
+    "portchain-dustjs-helpers": "0.1.0",
+    "postgrator": "2.9.0"
   },
   "devDependencies": {
     "mocha": "1.18.2"

@@ -50,6 +50,15 @@ clients.
 
 # Quick start
 
+Some environment variables can be set to point infinitas to the proper
+PostgreSQL database:
+
+- `INFINITAS_DB_HOST` defaults to `127.0.0.1`
+- `INFINITAS_DB_PORT` defaults to `5432`
+- `INFINITAS_DB_NAME` defaults to `infinitas`
+- `INFINITAS_DB_USER` defaults to `infinitas`
+- `INFINITAS_DB_PWD` defaults to `infinitas`
+
 ```
 const Infinitas = require('infinitas')
     
@@ -65,11 +74,8 @@ infinitas.schedule(task, function(err) {
   // jobs for that task will be created every minute and every hour
 })
 
-// unschedule a task
-infinitas.unschedule('myTaskName', function(err) {})
-
 // Here is how you declare your business logic
-infinitas.addProcessor('myTaskName', function(job) {
+infinitas.addProcessor(task.name, function(job) {
   // task business logic here...
 
   job.on('timeout', (taskTimeoutValue) => {
@@ -141,7 +147,7 @@ A task has the following properties:
 > Properties with a ```*``` are read only.
 
 
-## Schedule
+## Job
 
 ## Processor
 

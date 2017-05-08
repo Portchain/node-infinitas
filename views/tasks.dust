@@ -1,0 +1,111 @@
+{>"layout"/}
+{<content}
+  <h1>Tasks {@gt key=total value="0"}- {total}{/gt}</h1>
+    <form class="search form-inline" method="GET">
+      <input type="hidden" name="_csrf" value="{csrf}" />
+      <input type="hidden" name="limit" value="{limit}" />
+      <div class="input-group input-group-sm">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search..." value="{searchTerm}" />
+        <span class="input-group-btn">
+          <input class="btn btn-secondary" type="submit" value="Go" />
+        </span>
+      </div>
+      <div class="results-info">
+        {@eq key=searchTotal value="1"}1 task matches your search{/eq}
+        {@gt key=searchTotal value="1"}{searchTotal} tasks match your search{/gt}
+        {?searchTerm}{@eq key=searchTotal value="0"}No results{/eq}{/searchTerm}
+      </div>
+    </form>
+    <a href="/task/null">new task</a>
+  <div class="pull-right">
+    <div class="dropdown">
+      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {limit}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="?searchTerm={searchTerm}&to={to}&from={from}&limit=10">10</a>
+        <a class="dropdown-item" href="?searchTerm={searchTerm}&to={to}&from={from}&limit=50">50</a>
+        <a class="dropdown-item" href="?searchTerm={searchTerm}&to={to}&from={from}&limit=100">100</a>
+        <a class="dropdown-item" href="?searchTerm={searchTerm}&to={to}&from={from}&limit=200">200</a>
+      </div>
+    </div>
+    <a id="nav-previous" {#previousUrl}href="{.}"{:else}href="javascript:void(0)" disabled{/previousUrl}><< previous</a>
+    &nbsp;|&nbsp;
+    <a id="nav-next" {#nextUrl}href="{.}"{:else}href="javascript:void(0)" disabled{/nextUrl}>next >></a>
+  </div>
+  <table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Created Date</th>
+      <th>Timeout</th>
+      <th>Enabled</th>
+      <th>Next job</th>
+      <th>Last job started at</th>
+      <th>Last job ended at</th>
+      <th>Last job failed</th>
+      <th>Jobs run</th>
+    </tr>
+  </thead>
+  <tbody>
+  {#tasks}
+    <tr>
+      <td>
+        <a href="task/{name}">{name}</a>
+      </td>
+      <td>{@formatDate date="{createdDate}" format="YYYY/MM/DD HH:mm" /}</td>
+      <td>{timeoutMs}</td>
+      <td>{@formatBoolean value="{enabled}" /}</td>
+      <td>{@formatDate date="{nextJobDate}" format="YYYY/MM/DD HH:mm" /}</td>
+      <td>{@formatDate date="{lastJobStartedDate}" format="YYYY/MM/DD HH:mm" /}</td>
+      <td>{@formatDate date="{lastJobEndedDate}" format="YYYY/MM/DD HH:mm" /}</td>
+      <td>
+        <a href="job/{lastJobId}">{@formatBoolean value="{lastJobFailed}" /}</a>
+      </td>
+      <td>{jobCount}</td>
+      <td>
+        <form class="search form-inline" method="POST" action="/api/task/{name}">
+          <input type="hidden" name="_csrf" value="{csrf}" />
+          <input type="hidden" name="from" value="{from}"/>
+          <input type="hidden" name="to" value="{to}"/>
+          <input type="hidden" name="searchTerm" value="{searchTerm}"/>
+          <input type="hidden" name="limit" value="{limit}"/>
+          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+          
+            {?enabled}
+              <button type="submit" class="btn btn-secondary" name="makeAdmin" value="false" data-toggle="tooltip" data-placement="left" title="Disable">
+                <i class="fa fa-star" aria-hidden="true"></i>
+              </button>
+            {:else}
+              <button type="submit" class="btn btn-secondary" name="makeAdmin" value="true" data-toggle="tooltip" data-placement="left" title="Enable" >
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+              </button>
+            {/enabled}
+            
+          </div>
+        </form>
+      </td>
+    </tr>
+  {/tasks}
+  </tbody>
+  </table>
+  <script>
+    function navigate(direction) {
+      let link = document.getElementById('nav-' + direction);
+      if(link.href != 'javascript:void(0)') {
+        window.location = link.href
+      }
+    }
+    document.onkeydown = function(evt) {
+      evt = evt || window.event;
+      switch (evt.keyCode) {
+        case 37:
+          navigate('previous');
+          break;
+        case 39:
+          navigate('next');
+          break;
+      }
+    }
+  </script>
+{/content}

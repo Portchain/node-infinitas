@@ -1,0 +1,104 @@
+body > header {
+  height: 60px;
+  background-color: #0d2a66;
+  color: white; }
+  body > header .logo {
+    float: left;
+    line-height: 60px;
+    margin-left: 20px;
+    font-size: 2em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: #556a96; }
+  body > header .title,
+  body > header .chat,
+  body > header .settings-button {
+    line-height: 60px;
+    float: right;
+    font-size: 1em;
+    margin-right: 10px;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    padding: 0 20px; }
+    body > header .title:hover,
+    body > header .chat:hover,
+    body > header .settings-button:hover {
+      background-color: #556a96; }
+  body > header .title {
+    float: left;
+    max-width: 200px;
+    font-size: 1.2em;
+    margin: 0 auto;
+    color: #CCC; }
+    body > header .title:hover {
+      background-color: transparent; }
+  body > header .settings-menu {
+    display: none;
+    z-index: 999;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    color: white;
+    background-color: #0d2a66;
+    margin: 0;
+    padding: 0;
+    line-height: 1em; }
+    body > header .settings-menu a,
+    body > header .settings-menu a:visited,
+    body > header .settings-menu a:hover,
+    body > header .settings-menu a:active {
+      width: 100%;
+      height: 100%;
+      display: block;
+      color: white;
+      text-decoration: none; }
+    body > header .settings-menu li {
+      position: relative;
+      margin: 0;
+      text-align: right;
+      border-botom: solid 1px #CCC;
+      padding: 5px 20px 10px 0; }
+      body > header .settings-menu li:hover {
+        background-color: #556a96; }
+  body > header .settings-button:hover > .settings-menu {
+    display: block; }
+  body > header .ports-submenu {
+    display: none;
+    z-index: 999;
+    position: absolute;
+    top: 0px;
+    right: 100%;
+    width: 100%;
+    color: white;
+    background-color: #0d2a66;
+    margin: 0;
+    padding: 0;
+    line-height: 1em; }
+    body > header .ports-submenu li {
+      position: relative;
+      margin: 0;
+      padding: 5px 20px 10px 0;
+      text-align: right;
+      border-botom: 1px solid #CCC; }
+      body > header .ports-submenu li:hover {
+        background-color: #556a96; }
+  body > header .settings-menu-item.ports:hover > .ports-submenu {
+    display: block; }
+  body > header .chat > .badge {
+    display: inline-block;
+    margin-left: 0.5em;
+    line-height: 2em;
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    background-color: #1ac195;
+    text-align: center;
+    font-weight: bold; }
+  body > header .settings a {
+    color: white;
+    text-decoration: none; }
+    body > header .settings a:hover {
+      color: white;
+      text-decoration: underline; }

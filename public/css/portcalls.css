@@ -1,0 +1,217 @@
+input.switch,
+input.switch ~ label {
+  display: inline-block; }
+
+input.switch:empty {
+  margin-left: -999px; }
+
+input.switch:empty ~ label {
+  position: relative;
+  float: left;
+  line-height: 1.6em;
+  text-indent: 4em;
+  margin: 0.2em 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+input.switch:empty ~ label:before,
+input.switch:empty ~ label:after {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: ' ';
+  width: 3.6em;
+  background-color: #CCCCCC;
+  border-radius: 1.6em;
+  -webkit-transition: all 100ms ease-in;
+  transition: all 100ms ease-in; }
+
+input.switch:empty ~ label:after {
+  width: 1.4em;
+  top: 0.1em;
+  bottom: 0.1em;
+  margin-left: 0.1em;
+  background-color: #fff;
+  border-radius: 1.4em; }
+
+input.switch:checked ~ label:before {
+  background-color: #73DCBC; }
+
+input.switch:checked ~ label:after {
+  margin-left: 2.1em; }
+
+body {
+  font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.02em; }
+
+a[disabled] {
+  pointer-events: none; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-size: 14px;
+  min-width: 400px; }
+
+ol, ul {
+  list-style: none; }
+
+.float-clear {
+  width: 100%;
+  clear: both; }
+
+.vessel-list {
+  background-color: white;
+  height: calc(100% - 60px);
+  overflow-y: auto; }
+  .vessel-list::-webkit-scrollbar {
+    display: none; }
+  .vessel-list ol {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block; }
+    .vessel-list ol li {
+      width: 100%;
+      color: #364f83;
+      vertical-align: middle; }
+      .vessel-list ol li.separator {
+        display: inline-block;
+        padding: 10px 0;
+        background-color: #d2e1ef;
+        font-weight: bolder;
+        vertical-align: middle; }
+      .vessel-list ol li.vessel {
+        padding: 0;
+        display: block;
+        background-color: #e8f0f7;
+        margin-bottom: 1px; }
+        .vessel-list ol li.vessel a {
+          display: block;
+          height: 100%;
+          width: 100%;
+          color: #364f83;
+          padding: 10px 0; }
+          .vessel-list ol li.vessel a:visited {
+            color: #364f83; }
+          .vessel-list ol li.vessel a:hover, .vessel-list ol li.vessel a:active, .vessel-list ol li.vessel a.active {
+            color: white;
+            background-color: #3c558a; }
+        .vessel-list ol li.vessel .primary {
+          font-size: 1.5em; }
+        .vessel-list ol li.vessel .secondary {
+          color: #0ab286; }
+      .vessel-list ol li .left {
+        display: inline-block;
+        padding-left: 20px;
+        width: calc(80% - 20px); }
+      .vessel-list ol li .right {
+        display: inline-block;
+        width: 20%; }
+    .vessel-list ol span {
+      height: 100%;
+      vertical-align: middle; }
+
+.vessel {
+  width: 100%; }
+  .vessel header {
+    margin: 0;
+    padding: 0;
+    background-color: #3c558a;
+    color: white; }
+    .vessel header div {
+      display: inline-block; }
+    .vessel header > .title {
+      margin: 20px 20px;
+      float: left; }
+      .vessel header > .title h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 3em;
+        font-weight: normal; }
+      .vessel header > .title .subtext {
+        margin-top: 10px; }
+        .vessel header > .title .subtext .title {
+          opacity: 0.4;
+          font-weight: bold; }
+        .vessel header > .title .subtext .value {
+          margin: 0 30px 0 10px;
+          color: #1cca9b;
+          font-weight: bolder; }
+    .vessel header .vessel-details {
+      margin: 20px;
+      float: right;
+      text-align: left;
+      font-size: 0.95em; }
+      .vessel header .vessel-details table {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 5px 0; }
+      .vessel header .vessel-details .title {
+        opacity: 0.4; }
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .vessel-list, .vessel {
+    float: left; }
+  .vessel-list {
+    width: 40%; }
+  .vessel {
+    width: 60%; } }
+
+@media screen and (min-width: 1024px) {
+  .vessel-list, .vessel {
+    float: left; }
+  .vessel-list {
+    width: 30%; }
+  .vessel {
+    width: 70%; } }
+
+.range-slider {
+  position: relative;
+  width: 200px;
+  height: 35px;
+  text-align: center;
+  display: inline-block; }
+  .range-slider input {
+    pointer-events: none;
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 15px;
+    width: 200px;
+    outline: none;
+    height: 18px;
+    margin: 0;
+    padding: 0; }
+  .range-slider input::-webkit-slider-thumb {
+    pointer-events: all;
+    position: relative;
+    z-index: 1;
+    outline: 0; }
+  .range-slider input::-moz-range-thumb {
+    pointer-events: all;
+    position: relative;
+    z-index: 10;
+    -moz-appearance: none;
+    width: 9px; }
+  .range-slider input::-moz-range-track {
+    position: relative;
+    z-index: -1;
+    background-color: black;
+    border: 0; }
+  .range-slider input:last-of-type::-moz-range-track {
+    -moz-appearance: none;
+    background: none transparent;
+    border: 0; }
+  .range-slider input[type=range]::-moz-focus-outer {
+    border: 0; }
