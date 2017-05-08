@@ -5,17 +5,37 @@
     <form action="/api/task" method="POST">
       <input type="hidden" name="_csrf" value="{csrf}" />
       <div class="form-group row control-group">
-        <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-5 controls">
-        <input class="form-control" type="text" name="schedule" placeholder="" value="{task.name}" {#task.name}readonly{/task.name}/>
+        <input class="form-control" type="text" name="name" placeholder="" value="{task.name}" {#task.name}readonly{/task.name}/>
         </div>
       </div>
       <div class="form-group row control-group">
-        <label for="example-text-input" class="col-sm-2 col-form-label">Schedule</label>
+        <label for="schedule" class="col-sm-2 col-form-label">Schedule</label>
         <div class="col-sm-5 controls">
           <input class="form-control" type="text" name="schedule" placeholder="*/12 * * * *" value="{task.schedule}" />
         </div>
       </div>
+      <div class="form-group row control-group">
+        <label for="timeoutMs" class="col-sm-2 col-form-label">Timeout (milliseconds)</label>
+        <div class="col-sm-5 controls">
+          <input class="form-control" type="text" name="timeoutMs" placeholder="10000" value="{task.timeoutMs}" />
+        </div>
+      </div>
+      <div class="form-group row control-group">
+        <label for="enabled" class="col-sm-2 col-form-label">Enabled</label>
+        <div class="col-sm-5 controls">
+          <input class="form-control" type="checkbox" name="enabled" {#task.enabled}checked{/task.enabled} />
+        </div>
+      </div>
+      {#task}
+      <div class="form-group row control-group">
+        <label for="nextJobDate" class="col-sm-2 col-form-label">next Job</label>
+        <div class="col-sm-5 controls">
+          <input class="form-control" type="text" name="nextJobDate" readonly value="{nextJobDate}" />
+        </div>
+      </div>
+      {/task}
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>

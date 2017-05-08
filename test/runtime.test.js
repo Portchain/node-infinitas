@@ -23,7 +23,7 @@ describe('runtime', function() {
       schedule: '*/1 * * * * *',
       timeout: 10000
     }, (err) => {
-      done()
+      done(err)
     })
   })
 

@@ -19,7 +19,7 @@ function Infinitas(options) {
 
       this._scheduler = new Scheduler(/*pollDB*/ true)
       this._scheduler.on('job', (taskName, job) => {
-        logger.info(`JOB EVENT ${taskName}.${job.id}`, this._processors)
+        logger.info(`Job triggered ${taskName}.${job.id}`)
         if(this._processors[taskName]) {
           let processor = this._processors[taskName]
           logger.info(`Running job ${taskName}.${job.id}`)
