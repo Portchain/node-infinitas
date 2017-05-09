@@ -53,7 +53,7 @@
     <tr onmouseover="showLogs(this)" onmouseout="hideLogs(this)">
       <td>{id}
         <div class="logs">
-          <code>{#logs}{loggedDate}: {message}<br/>{/logs}</code>
+          <code>{#logs}{@formatDate date="{loggedDate}" format="YYYY/MM/DD HH:mm:ss.SSS" /}: {message}<br/>{/logs}</code>
         </log>
       </td>
       <td>{@formatDate date="{startedDate}" format="YYYY/MM/DD HH:mm" /}</td>
