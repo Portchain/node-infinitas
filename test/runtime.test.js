@@ -85,7 +85,7 @@ describe('runtime', function() {
       })
     })
 
-    it('register a processor', function(done) {
+    it('check that the job timeout', function(done) {
       
       infinitas.setProcessor(testId, job => {
         
@@ -102,12 +102,15 @@ describe('runtime', function() {
             assert.equal(task.jobs[0].logs.length, 1)
             assert.ok(task.jobs[0].logs[0])
             assert.ok(/timed out/.test(task.jobs[0].logs[0].message))
-            done()
+
+            job.done((err) => {
+              assert.ok(err)
+              assert.ok(/timed out/.test(err.message))
+              done()
+            })
           })
           
         }, 600)
-          
-        
         
       })
     })
