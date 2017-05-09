@@ -11,13 +11,13 @@ function Infinitas(options) {
   this._processors = {}
 
   if(!options.server) {
-    server((err) => {
+    server(options, (err) => {
       if(err) {
         logger.error(err)
         process.exit(1)
       }
 
-      this._scheduler = new Scheduler(/*pollDB*/ true)
+      this._scheduler = new Scheduler(options.db, /*pollDB*/ true)
       this._scheduler.on('job', (taskName, job) => {
         logger.info(`Job triggered ${taskName}.${job.id}`)
         if(this._processors[taskName]) {
@@ -62,9 +62,6 @@ Infinitas.prototype.fetchTask = function(taskName, callback) {
 Infinitas.prototype.setProcessor = function(taskName, func) {
   this._processors[taskName] = func
 }
-
-
-
 
 
 
