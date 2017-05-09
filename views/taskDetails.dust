@@ -50,24 +50,28 @@
   </thead>
   <tbody>
     {#task.jobs}
-    <tr onClick="showLogs()">
-      <td>{id}</td>
+    <tr onmouseover="showLogs(this)" onmouseout="hideLogs(this)">
+      <td>{id}
+        <div class="logs">
+          <code>{#logs}{loggedDate}: {message}<br/>{/logs}</code>
+        </log>
+      </td>
       <td>{@formatDate date="{startedDate}" format="YYYY/MM/DD HH:mm" /}</td>
       <td>{@formatDate date="{endedDate}" format="YYYY/MM/DD HH:mm" /}</td>
       <td>{@formatBoolean value="{failed}" /}</td>
-    </tr>
-    <tr>
-      <td>
-      <code>{#logs}{loggedDate}: {message}<br/>{/logs}</code>
-      </td>
     </tr>
     {/task.jobs}
   </tbody>
   </table>
 <form>
 <script>
-  function showLogs(id) {
-
+  function showLogs(row) {
+    var code = row.getElementsByClassName('logs')[0]
+    code.style.display = 'block';
+  }
+  function hideLogs(row) {
+    var code = row.getElementsByClassName('logs')[0]
+    code.style.display = 'none';
   }
 </script>
 {/content}
