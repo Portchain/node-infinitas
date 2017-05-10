@@ -70,7 +70,7 @@ describe('runtime', function() {
   })
 
   describe('task timeout', () => {
-    
+
     let testId = 'test-' + crypto.randomBytes(3).toString('hex')
 
     let task = {
@@ -78,17 +78,17 @@ describe('runtime', function() {
       schedule: '* * * * * *',
       timeout: 500
     }
-    
+
     it('schedule task', function(done) {
       infinitas.schedule(task, (err) => {
         done(err)
       })
     })
 
-    it('check that the job timeout', function(done) {
-      
+    it('the job should time out', function(done) {
+
       infinitas.setProcessor(testId, job => {
-        
+
         setTimeout(() => {
 
           infinitas.fetchTask(testId, (err, task) => {
@@ -109,7 +109,7 @@ describe('runtime', function() {
               done()
             })
           })
-          
+
         }, 600)
         
       })

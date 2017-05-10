@@ -80,18 +80,13 @@ infinitas.addProcessor(task.name, function(job) {
 
   job.on('timeout', (taskTimeoutValue) => {
     // The job timed-out
-    // Note that because this event, job.done() and job.fail() are all
+    // Note that because this event, job.done(), and job.fail() are all
     //   asynchronous there is no guarantee that the timeout event will fire
     //   before you call job.done() or job.fail().
     // Regardless of a job timeout status, job.log() will continue to log
     //   your messages.
   })
-
-  // optionally, you can signal the progress of a job
-  job.progress(0.10) // with either a float between 0 and 1 respectively 0% and 100%
-  job.progress('step1') // or steps
-  job.progress(0.30, 'step2') // or both
-
+  
   // log information related to the job
   // An optional callback will catch transmission errors to the server.
   // If no callback is used, errors are ignored
