@@ -59,6 +59,9 @@ PostgreSQL database:
 - `INFINITAS_DB_USER` defaults to `infinitas`
 - `INFINITAS_DB_PWD` defaults to `infinitas`
 
+You can also set the port used by Infinitas through `INFINITAS_PORT`.
+
+
 ```
 const Infinitas = require('infinitas')
     

@@ -1,0 +1,8 @@
+machine:
+  postgres:
+    version: 9.6
+  environment:
+    INFINITAS_DB_USER: ubuntu
+    INFINITAS_DB_NAME: circle_test
+  node:
+    version: 7.10.0

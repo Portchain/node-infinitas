@@ -34,6 +34,8 @@
     "body-parser": "1.17.1",
     "cron-parser": "2.4.0",
     "csurf": "1.9.0",
+    "dustjs-helpers": "1.7.3",
+    "dustjs-linkedin": "2.7.5",
     "express": "4.15.2",
     "logacious": "0.2.0",
     "moment": "2.18.1",

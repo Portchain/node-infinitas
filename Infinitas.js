@@ -58,12 +58,9 @@ Infinitas.prototype.fetchTask = function(taskName, callback) {
   this._scheduler.fetchTask(taskName, callback)
 }
 
-
 Infinitas.prototype.setProcessor = function(taskName, func) {
   this._processors[taskName] = func
 }
-
-
 
 if(require.main === module) {
   new Infinitas()
