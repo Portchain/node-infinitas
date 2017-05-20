@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha test --reporter spec"
+    "test": "INFINITAS_DB_PWD=infinitas ./node_modules/.bin/mocha test --reporter spec"
   },
   "repository": {
     "type": "git",
