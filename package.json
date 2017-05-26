@@ -1,6 +1,6 @@
 {
   "name": "infinitas",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "distributed scheduling system with flexible persistence",
   "main": "Infinitas.js",
   "directories": {
