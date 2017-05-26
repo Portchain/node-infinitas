@@ -58,6 +58,10 @@ Infinitas.prototype.fetchTask = function(taskName, callback) {
   this._scheduler.fetchTask(taskName, callback)
 }
 
+Infinitas.prototype.fetchJob = function(jobId, callback) {
+  this._scheduler.fetchJob(jobId, callback)
+}
+
 Infinitas.prototype.setProcessor = function(taskName, func) {
   this._processors[taskName] = func
 }

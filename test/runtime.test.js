@@ -53,12 +53,18 @@ describe('runtime', function() {
         assert.ok(task.jobs)
         assert.equal(task.jobs.length, 1)
         assert.ok(task.jobs[0])
-        assert.ok(task.jobs[0].logs)
-        assert.equal(task.jobs[0].logs.length, 1)
-        assert.ok(task.jobs[0].logs[0])
-        assert.ok(task.jobs[0].logs[0].loggedDate)
-        assert.equal(task.jobs[0].logs[0].message, 'hello world')
-        done()
+        let jobId = task.jobs[0].id
+        
+        infinitas.fetchJob(jobId, (err, job) => {
+          assert.ok(!err, err ? err.stack : '')
+          assert.ok(job)
+          assert.ok(job.logs)
+          assert.equal(job.logs.length, 1)
+          assert.ok(job.logs[0])
+          assert.ok(job.logs[0].loggedDate)
+          assert.equal(job.logs[0].message, 'hello world')
+          done()
+        })
       })
     })
 
@@ -98,15 +104,22 @@ describe('runtime', function() {
             assert.equal(task.jobs.length, 1)
             assert.ok(task.jobs[0])
             assert.ok(task.jobs[0].failed)
-            assert.ok(task.jobs[0].logs)
-            assert.equal(task.jobs[0].logs.length, 1)
-            assert.ok(task.jobs[0].logs[0])
-            assert.ok(/timed out/.test(task.jobs[0].logs[0].message))
+            
+            let jobId = task.jobs[0].id
+            infinitas.fetchJob(jobId, (err, jobData) => {
+              assert.ok(!err, err ? err.stack : '')
+              assert.ok(jobData)
+              assert.ok(jobData.logs)
+              assert.equal(jobData.logs.length, 1)
+              assert.ok(jobData.logs[0])
+              assert.ok(/timed out/.test(jobData.logs[0].message))
 
-            job.done((err) => {
-              assert.ok(err)
-              assert.ok(/timed out/.test(err.message))
-              done()
+              job.done((err) => {
+                assert.ok(err)
+                assert.ok(/timed out/.test(err.message))
+                done()
+              })
+              
             })
           })
 

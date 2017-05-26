@@ -38,6 +38,7 @@
       {/task}
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
+    <button onclick="triggerTask('{task.name}')" class="btn btn-success">Trigger now</button>
   </div>
   <table class="table table-sm table-striped">
   <thead>
@@ -50,12 +51,8 @@
   </thead>
   <tbody>
     {#task.jobs}
-    <tr onmouseover="showLogs(this)" onmouseout="hideLogs(this)">
-      <td>{id}
-        <div class="logs">
-          <code>{#logs}{@formatDate date="{loggedDate}" format="YYYY/MM/DD HH:mm:ss.SSS" /}: {message}<br/>{/logs}</code>
-        </log>
-      </td>
+    <tr>
+      <td><a href="/job/{id}">{id}</a></td>
       <td>{@formatDate date="{startedDate}" format="YYYY/MM/DD HH:mm" /}</td>
       <td>{@formatDate date="{endedDate}" format="YYYY/MM/DD HH:mm" /}</td>
       <td>{@formatBoolean value="{failed}" /}</td>
@@ -65,13 +62,8 @@
   </table>
 <form>
 <script>
-  function showLogs(row) {
-    var code = row.getElementsByClassName('logs')[0]
-    code.style.display = 'block';
-  }
-  function hideLogs(row) {
-    var code = row.getElementsByClassName('logs')[0]
-    code.style.display = 'none';
+  function triggerTask(taskName) {
+    document.location.href = '/api/task/trigger/' + taskName
   }
 </script>
 {/content}

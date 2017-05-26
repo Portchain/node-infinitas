@@ -1,0 +1,13 @@
+{>"layout" /}
+{<content}
+  <h1>{taskName}</h1>
+  <ul>
+    <li>Failed: {@formatBoolean value="{failed}" /}</li>
+    <li>Started: {@formatDate date="{startedDate}" format="YYYY/MM/DD HH:mm" /}</li>
+    <li>Ended: {@formatDate date="{endedDate}" format="YYYY/MM/DD HH:mm" /}</li>
+  </ul>
+  <table class="table table-sm table-striped">
+  <code>{#logs}{@formatDate date="{loggedDate}" format="YYYY/MM/DD HH:mm:ss.SSS" /} {message}
+{/logs}</code>
+<form>
+{/content}

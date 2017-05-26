@@ -14,22 +14,9 @@ LEFT JOIN (
       'id', j.id,
       'startedDate', j.started_date,
       'endedDate',j.ended_date,
-      'failed', j.failed,
-      'logs', log.list
+      'failed', j.failed
     ) ORDER BY started_date DESC) AS list
   FROM infinitas_jobs AS j
-  LEFT JOIN (
-    SELECT
-      l.job,
-      ARRAY_AGG(JSON_BUILD_OBJECT(
-        'loggedDate', l.logged_date,
-        'message', l.message
-      ) ORDER BY l.logged_date ASC) AS list
-    FROM infinitas_job_logs AS l
-    INNER JOIN infinitas_jobs AS j ON j.id = l.job
-    WHERE j.task = $1
-    GROUP BY l.job
-  ) AS log ON log.job = j.id
   WHERE j.task = $1
 ) AS j ON TRUE
 WHERE t.name = $1
